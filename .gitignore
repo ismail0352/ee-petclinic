@@ -1,0 +1,7 @@
+*.pem
+*.pub
+
+.terraform/
+.idea/
+
+terraform*
