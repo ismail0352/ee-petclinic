@@ -8,10 +8,10 @@ data "aws_ami" "ubuntu18" {
   }
 }
 
-module "petclinic_ec2_nat" {
+module "petclinic_ec2_jenkins_server" {
   source = "github.com/terraform-aws-modules/terraform-aws-ec2-instance.git"
   instance_count              = 1
-  name                        = "petclinic_ec2_nat"
+  name                        = "petclinic_ec2_jenkins_server"
   ami                         = data.aws_ami.ubuntu18.id
   instance_type               = var.instance_type
   subnet_id                   = tolist(module.petclinic_vpc.public_subnets)[0]
@@ -32,7 +32,7 @@ module "petclinic_ec2_private" {
   ami                         = data.aws_ami.ubuntu18.id
   instance_type               = var.instance_type
   subnet_id                   = tolist(module.petclinic_vpc.private_subnets)[0]
-  vpc_security_group_ids      = [module.petclinic_sg_group.this_security_group_id]
+  vpc_security_group_ids      = [module.petclinic_sg_private.this_security_group_id]
   associate_public_ip_address = false
   user_data                   = file("./private.sh")
   key_name                    = var.key_pair
