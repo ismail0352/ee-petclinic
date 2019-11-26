@@ -1,4 +1,5 @@
 pipeline {
+    agent { label: master }
     stages {
         stage('checkout') {
             steps {
@@ -11,16 +12,16 @@ pipeline {
             }
         }
 
-//         stage('Build') {
-//             steps {
-//                 sh './mvnw package'
-//             }
-//         }
-//
-//         stage('') {
-//             steps {
-//                 echo "copy to mnt"
-//             }
-//         }
+        stage('Build') {
+            steps {
+                sh './mvnw package'
+            }
+        }
+
+        stage('') {
+            steps {
+                echo "copy to mnt"
+            }
+        }
     }
 }
